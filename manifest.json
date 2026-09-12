@@ -8,7 +8,7 @@
     "default_icon": "asset/gpr-icons/png/default.png"
   },
   "icons": {
-    "64": "asset/gpr-icons/png/default.png"
+    "128": "asset/gpr-icons/png/default.png"
   },
   "host_permissions": ["<all_urls>"],
   "web_accessible_resources": [
@@ -20,7 +20,7 @@
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["parser.js", "evaluator.js", "ruleLoader.js", "content.js"],
+      "js": ["engine/parser.js", "engine/evaluator.js", "engine/ruleLoader.js", "content.js"],
       "run_at": "document_idle"
     }
   ]

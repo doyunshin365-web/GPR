@@ -1,11 +1,3 @@
-/**
- * PhishRule evaluator (브라우저용, content script)
- * parser.js보다 나중에 로드되어야 함 (manifest.json content_scripts 순서 참고)
- *
- * context 형태:
- *   { text: string, domain: string }
- */
-
 (function (global) {
   const { parseCondition } = global.PhishRule;
 
