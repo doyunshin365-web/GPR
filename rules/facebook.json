@@ -1,0 +1,18 @@
+{
+  "name": "Facebook_Account_Phishing",
+  "author": "doyun",
+  "description": "Facebook 계정 정지 및 인증을 사칭하는 피싱 페이지 탐지",
+  "conditions": {
+    "eq": [
+      "match text \"facebook\" AND match text \"account has been suspended\" AND match text \"verify\"",
+      "match text \"facebook\" AND match text \"verify your account\" AND match text \"password\"",
+      "match text \"facebook\" AND match text \"unusual activity\" AND match text \"sign in\"",
+      "match text \"facebook\" AND match text \"account verification\" AND match text \"security\""
+    ],
+    "except": [
+      "match domain \"facebook.com\"",
+      "match domain \"fb.com\""
+    ]
+  },
+  "detect": 1
+}

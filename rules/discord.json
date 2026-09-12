@@ -1,0 +1,18 @@
+{
+  "name": "Discord_Account_Phishing",
+  "author": "doyun",
+  "description": "Discord 계정 및 보안 인증을 사칭하는 피싱 페이지 탐지",
+  "conditions": {
+    "eq": [
+      "match text \"discord\" AND match text \"account has been limited\" AND match text \"verify\"",
+      "match text \"discord\" AND match text \"verify your account\" AND match text \"password\"",
+      "match text \"discord\" AND match text \"security alert\" AND match text \"login\"",
+      "match text \"discord\" AND match text \"account verification\" AND match text \"authentication\""
+    ],
+    "except": [
+      "match domain \"discord.com\"",
+      "match domain \"discordapp.com\""
+    ]
+  },
+  "detect": 1
+}

@@ -1,0 +1,20 @@
+{
+  "name": "Microsoft_Account_Phishing",
+  "author": "doyun",
+  "description": "Microsoft 계정 인증 및 보안 경고를 사칭하는 피싱 페이지 탐지",
+  "conditions": {
+    "eq": [
+      "match text \"microsoft\" AND match text \"account has been locked\" AND match text \"verify your identity\"",
+      "match text \"microsoft\" AND match text \"unusual activity\" AND match text \"verify your account\"",
+      "match text \"microsoft\" AND match text \"security alert\" AND match text \"sign in\"",
+      "match text \"microsoft\" AND match text \"account verification\" AND match text \"password\""
+    ],
+    "except": [
+      "match domain \"microsoft.com\"",
+      "match domain \"microsoftonline.com\"",
+      "match domain \"live.com\"",
+      "match domain \"office.com\""
+    ]
+  },
+  "detect": 1
+}

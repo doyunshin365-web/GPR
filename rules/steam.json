@@ -1,0 +1,18 @@
+{
+  "name": "Steam_Account_Phishing",
+  "author": "doyun",
+  "description": "Steam 계정 탈취 및 보안 인증을 목적으로 하는 피싱 페이지 탐지",
+  "conditions": {
+    "eq": [
+      "match text \"steam\" AND match text \"account has been locked\" AND match text \"verify\"",
+      "match text \"steam\" AND match text \"verify your account\" AND match text \"password\"",
+      "match text \"steam\" AND match text \"suspicious activity\" AND match text \"login\"",
+      "match text \"steam\" AND match text \"account verification\" AND match text \"steam guard\""
+    ],
+    "except": [
+      "match domain \"steampowered.com\"",
+      "match domain \"steamcommunity.com\""
+    ]
+  },
+  "detect": 1
+}

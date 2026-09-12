@@ -1,0 +1,17 @@
+{
+  "name": "Netflix_Payment_Phishing",
+  "author": "doyun",
+  "description": "Netflix 결제 및 계정 문제를 사칭하는 피싱 페이지 탐지",
+  "conditions": {
+    "eq": [
+      "match text \"netflix\" AND match text \"payment failed\" AND match text \"update your payment\"",
+      "match text \"netflix\" AND match text \"account has been suspended\" AND match text \"payment\"",
+      "match text \"netflix\" AND match text \"billing information\" AND match text \"verify\"",
+      "match text \"netflix\" AND match text \"update payment information\" AND match text \"account\""
+    ],
+    "except": [
+      "match domain \"netflix.com\""
+    ]
+  },
+  "detect": 1
+}

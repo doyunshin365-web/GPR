@@ -1,0 +1,17 @@
+{
+  "name": "Instagram_Account_Phishing",
+  "author": "doyun",
+  "description": "Instagram 계정 인증 및 정지를 사칭하는 피싱 페이지 탐지",
+  "conditions": {
+    "eq": [
+      "match text \"instagram\" AND match text \"account has been suspended\" AND match text \"appeal\"",
+      "match text \"instagram\" AND match text \"verify your account\" AND match text \"password\"",
+      "match text \"instagram\" AND match text \"unusual activity\" AND match text \"login\"",
+      "match text \"instagram\" AND match text \"account verification\" AND match text \"security\""
+    ],
+    "except": [
+      "match domain \"instagram.com\""
+    ]
+  },
+  "detect": 1
+}

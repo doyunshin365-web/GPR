@@ -1,0 +1,20 @@
+{
+  "name": "Amazon_Account_Phishing",
+  "author": "doyun",
+  "description": "Amazon 계정 및 주문 결제 정보를 사칭하는 피싱 페이지 탐지",
+  "conditions": {
+    "eq": [
+      "match text \"amazon\" AND match text \"account has been suspended\" AND match text \"verify your account\"",
+      "match text \"amazon\" AND match text \"unusual activity\" AND match text \"sign in\"",
+      "match text \"amazon\" AND match text \"confirm your account\" AND match text \"payment information\"",
+      "match text \"amazon\" AND match text \"verify your identity\" AND match text \"password\""
+    ],
+    "except": [
+      "match domain \"amazon.com\"",
+      "match domain \"amazon.co.uk\"",
+      "match domain \"amazon.de\"",
+      "match domain \"amazon.co.jp\""
+    ]
+  },
+  "detect": 1
+}

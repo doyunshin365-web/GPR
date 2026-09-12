@@ -1,1 +1,13 @@
-["test_paypal.json"]
+["test_paypal.json",
+  "microsoft.json",
+  "google.json",
+  "apple.json",
+  "amazon.json",
+  "discord.json",
+  "steam.json",
+  "instagram.json",
+  "facebook.json",
+  "netflix.json",
+  "coinbase.json",
+  "generic_account.json"
+]

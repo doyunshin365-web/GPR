@@ -1,0 +1,17 @@
+{
+  "name": "Coinbase_Account_Phishing",
+  "author": "doyun",
+  "description": "Coinbase 계정 및 신원 인증을 사칭하는 피싱 페이지 탐지",
+  "conditions": {
+    "eq": [
+      "match text \"coinbase\" AND match text \"account has been restricted\" AND match text \"verify\"",
+      "match text \"coinbase\" AND match text \"verify your identity\" AND match text \"login\"",
+      "match text \"coinbase\" AND match text \"suspicious activity\" AND match text \"password\"",
+      "match text \"coinbase\" AND match text \"identity verification\" AND match text \"account\""
+    ],
+    "except": [
+      "match domain \"coinbase.com\""
+    ]
+  },
+  "detect": 1
+}

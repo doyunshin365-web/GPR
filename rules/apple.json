@@ -1,0 +1,18 @@
+{
+  "name": "Apple_ID_Phishing",
+  "author": "doyun",
+  "description": "Apple ID 및 계정 보안 경고를 사칭하는 피싱 페이지 탐지",
+  "conditions": {
+    "eq": [
+      "match text \"apple\" AND match text \"apple id\" AND match text \"account has been locked\"",
+      "match text \"apple id\" AND match text \"verify your identity\" AND match text \"password\"",
+      "match text \"apple id\" AND match text \"security alert\" AND match text \"sign in\"",
+      "match text \"apple\" AND match text \"account verification\" AND match text \"payment information\""
+    ],
+    "except": [
+      "match domain \"apple.com\"",
+      "match domain \"icloud.com\""
+    ]
+  },
+  "detect": 1
+}
