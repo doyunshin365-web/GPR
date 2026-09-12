@@ -6,6 +6,7 @@
 
 - 페이지 텍스트/도메인을 기준으로 한 룰 기반 탐지 (YARA와 유사한 문법)
 - 룰은 JSON 파일로 정의 — 코드 수정 없이 룰 추가/수정 가능
+- `rules/whitelists.json`에 등록한 도메인은 룰 평가 없이 항상 `safe`
 - `safe` / `suspect` / `threat` 3단계 판정
 - `threat` 감지 시 팝업을 열지 않아도 페이지 우하단에 경고 토스트 표시
 
@@ -17,7 +18,9 @@ manifest.json
       1. engine/parser.js     → 조건 문자열을 파싱해 AST 생성
       2. engine/evaluator.js  → AST를 현재 페이지 컨텍스트(text, domain)로 평가
       3. engine/ruleLoader.js → rules/index.json에 등록된 룰들을 fetch, 전부 평가
-      4. content.js           → 평가 결과를 종합해 상태(state) 결정, popup에 응답 + 토스트 표시
+      4. content.js           → rules/whitelists.json 먼저 확인 (걸리면 즉시 safe)
+                                 아니면 평가 결과를 종합해 상태(state) 결정,
+                                 popup에 응답 + 토스트 표시
 ```
 
 `popup.js`는 활성 탭의 content script에 `GPR_GET_STATUS` 메시지를 보내 스캔 결과를 받아 표시합니다.
@@ -82,7 +85,9 @@ match text "paypal" AND (match text "payment" OR match text "authentication")
 
 ### 판정 로직
 
-각 룰에 대해:
+가장 먼저 현재 도메인이 [화이트리스트](#화이트리스트)에 있는지 확인합니다. 있으면 룰 평가 자체를 하지 않고 바로 `safe`로 확정합니다.
+
+화이트리스트에 없으면 각 룰에 대해:
 
 1. `except` 조건 중 하나라도 참이면 → 이 룰은 **안전** 처리 (검사 스킵, score 계산 안 함)
 2. 아니면 `eq` 조건들을 각각 평가해서 참인 개수를 `score`로 계산
@@ -106,6 +111,19 @@ match text "paypal" AND (match text "payment" OR match text "authentication")
 ```json
 ["test_paypal.json", "my_rule.json"]
 ```
+
+## 화이트리스트
+
+`rules/whitelists.json`에 도메인 문자열을 배열로 등록하면, 그 도메인에서는 룰 평가 없이 항상 `safe`로 표시됩니다. 오탐(false positive)이 발생한 정상 사이트를 예외 처리할 때 사용합니다.
+
+```json
+["paypal.com", "example.com"]
+```
+
+- 매칭 방식은 룰의 `match domain`과 동일하게 **완전 일치**, 대소문자 무시입니다.
+- 서브도메인은 자동으로 포함되지 않습니다. `www.paypal.com`도 안전 처리하려면 목록에 따로 추가해야 합니다.
+- `rules/index.json`에는 추가하지 않습니다. 룰이 아니라 전역 화이트리스트이기 때문에 `index.json`과 무관하게 항상 로드됩니다.
+- 특정 룰 하나만 예외 처리하고 싶다면 (전체 화이트리스트가 아니라) 해당 룰의 `conditions.except`에 도메인 조건을 추가하세요.
 
 ## 테스트
 

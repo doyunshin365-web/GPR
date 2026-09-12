@@ -1,0 +1,24 @@
+{
+  "name": "PayPal_Login_Phishing",
+  "author": "doyun",
+  "description": "PayPal 로그인 및 계정 인증을 사칭하는 피싱 페이지 탐지 (강화 버전)",
+  "conditions": {
+    "eq": [
+      "match text \"paypal\" AND match text \"your account has been limited\" AND match text \"verify your identity\"",
+      "match text \"paypal\" AND match text \"confirm your account\" AND match text \"password\"",
+      "match text \"paypal\" AND match text \"verify your account\" AND match text \"payment information\"",
+      "match text \"paypal\" AND match text \"account has been limited\" AND match text \"login\"",
+      "match text \"paypal\" AND match text \"secure your account\" AND match text \"update your information\"",
+      "match text \"paypal\" AND (match text \"unusual activity\" OR match text \"suspicious activity\") AND match text \"verify\"",
+      "match text \"paypal\" AND match text \"account suspension\" AND match text \"login to resolve\"",
+      "match text \"paypal\" AND match text \"we need to confirm\" AND match text \"billing information\""
+    ],
+    "except": [
+      "match domain \"paypal.com\"",
+      "match domain \"paypal.me\"",
+      "match domain \"www.paypal.com\"",
+      "match domain \"www.paypal.me\""
+    ]
+  },
+  "detect": 1
+}

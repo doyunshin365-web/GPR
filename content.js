@@ -41,6 +41,30 @@
     return { state: "safe", threatName: null };
   }
 
+  // ---------- 화이트리스트 ----------
+
+  /**
+   * rules/whitelists.json — 도메인 문자열 배열.
+   * 여기 있는 도메인이면 룰 평가 없이 바로 safe로 확정한다.
+   * (match domain 조건과 동일하게 완전 일치, 대소문자 무시. 서브도메인은 별도로 등록해야 함)
+   */
+  async function loadWhitelist(rulesUrl) {
+    try {
+      const res = await fetch(rulesUrl + "whitelists.json");
+      if (!res.ok) return [];
+      const list = await res.json();
+      if (!Array.isArray(list)) return [];
+      return list.map((d) => String(d).toLowerCase());
+    } catch (err) {
+      console.warn("GPR: whitelists.json 로드 실패", err);
+      return [];
+    }
+  }
+
+  function isWhitelisted(domain, whitelist) {
+    return whitelist.includes(String(domain).toLowerCase());
+  }
+
   // ---------- 위협 감지 시 페이지 우하단에 경고 토스트 ----------
 
   const TOAST_ID = "__gpr_threat_toast__";
@@ -142,6 +166,14 @@
     try {
       const context = PhishRule.getCurrentPageContext();
       const rulesUrl = chrome.runtime.getURL("rules/");
+
+      const whitelist = await loadWhitelist(rulesUrl);
+      if (isWhitelisted(context.domain, whitelist)) {
+        lastResult = { state: "safe", ruleCount: 0, threatName: null };
+        console.log("[GPR] 화이트리스트 도메인 - 검사 스킵", context.domain);
+        return;
+      }
+
       const evalResults = await PhishRule.evaluateAllRules(rulesUrl, context);
 
       const { state, threatName } = determineState(evalResults);
