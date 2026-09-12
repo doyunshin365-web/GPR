@@ -1,0 +1,159 @@
+:root {
+  --bg: #16181d;
+  --bg-elevated: #1e2128;
+  --border: #2a2e37;
+  --text-primary: #f2f3f5;
+  --text-secondary: #9aa0ac;
+  --accent: #ff6a3d;
+  --accent-dim: rgba(255, 106, 61, 0.15);
+  --safe: #3ddc84;
+  --suspect: #f5c451;
+  --threat: #ff4d4d;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  width: 320px;
+  background: var(--bg);
+  color: var(--text-primary);
+  font-family: "Pretendard", "Segoe UI", "Apple SD Gothic Neo", -apple-system,
+    sans-serif;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.scan {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 18px 16px;
+}
+
+/* ---------- 아이콘 + 스캔 상태 ---------- */
+
+.icon {
+  width: 56px;
+  height: 56px;
+  display: block;
+  margin: 4px auto 14px;
+  filter: drop-shadow(0 0 10px var(--accent-dim));
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.75;
+    transform: scale(0.96);
+  }
+}
+
+.status {
+  text-align: center;
+  padding-bottom: 18px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+.status .title {
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin-bottom: 4px;
+  color: var(--accent);
+}
+
+.status .subtitle {
+  font-size: 12.5px;
+  color: var(--text-secondary);
+  padding: 0 8px;
+}
+
+/* 상태별 색상 override — JS에서 .status에 클래스 추가해서 사용 */
+.status.safe .title {
+  color: var(--safe);
+}
+.status.suspect .title {
+  color: var(--suspect);
+}
+.status.threat .title {
+  color: var(--threat);
+}
+.status.threat .icon {
+  filter: drop-shadow(0 0 12px rgba(255, 77, 77, 0.35));
+}
+
+/* ---------- 소개 ---------- */
+
+.introduction {
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.introduction .title {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  margin-bottom: 3px;
+}
+
+.introduction #subtitle {
+  font-size: 11.5px;
+  color: var(--text-secondary);
+  padding: 0 10px;
+}
+
+/* ---------- 개요 (룰 개수 / 버전) ---------- */
+
+.overview {
+  display: grid;
+  grid-template-columns: auto 1fr auto 1fr;
+  align-items: center;
+  gap: 6px 8px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 14px;
+  margin-bottom: 14px;
+  font-size: 12px;
+}
+
+.overview strong {
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.overview p {
+  color: var(--text-primary);
+  font-weight: 600;
+  text-align: right;
+}
+
+/* ---------- 링크 ---------- */
+
+.links {
+  text-align: center;
+}
+
+.links a {
+  display: inline-block;
+  font-size: 11.5px;
+  color: var(--text-secondary);
+  text-decoration: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  transition: color 0.15s ease, background 0.15s ease;
+}
+
+.links a:hover {
+  color: var(--accent);
+  background: var(--accent-dim);
+}

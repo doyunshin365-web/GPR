@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GPR</title>
+    <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+    <div class="scan">
+        <img src="./asset/gpr-icons/png/idle.png" alt="" class="icon">
+        <div class="status">
+            <p class="title">Scanning...</p>
+            <p class="subtitle">Analyzing this site for potential security threats.</p>
+
+            <!-- <p class="title">Site is Safe</p>
+            <p class="subtitle">No security threats were detected on this site.</p> -->
+
+            <!-- <p class="title">Suspicious Activity</p>
+            <p class="subtitle">Potential security risks were detected. Proceed with caution.</p> -->
+
+            <!-- <p class="title">Threat Detected</p>
+            <p class="subtitle">This site may pose a security risk. Avoid entering sensitive information.</p> -->
+        </div>
+        <div class="introduction">
+            <p class="title">GPR</p>
+            <p id="subtitle">Detects phishing pages using custom YARA-like rules.</p>
+        </div>
+        <div class="overview">
+            <strong>Loaded rules:</strong><p id="rule_cnt">0</p>
+            <strong>Version:</strong><p id="v">1.0.0</p>
+        </div>
+        <div class="links">
+            <a href="https://github.com/doyunshin365-web/GPR">GPR Repository on GitHub</a>
+        </div>
+    </div>
+</body>
+</html>

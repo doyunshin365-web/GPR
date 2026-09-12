@@ -1,9 +1,27 @@
 {
   "manifest_version": 3,
-  "name": "My Extension",
+  "name": "GPR",
   "version": "1.0.0",
-  "description": "My Chrome Extension",
+  "description": "Detects phishing pages using custom YARA-like rules",
   "action": {
-    "default_popup": "popup.html"
-  }
+    "default_popup": "popup.html",
+    "default_icon": "asset/gpr-icons/png/default.png"
+  },
+  "icons": {
+    "64": "asset/gpr-icons/png/default.png"
+  },
+  "host_permissions": ["<all_urls>"],
+  "web_accessible_resources": [
+    {
+      "resources": ["rules/*.json"],
+      "matches": ["<all_urls>"]
+    }
+  ],
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["parser.js", "evaluator.js", "ruleLoader.js", "content.js"],
+      "run_at": "document_idle"
+    }
+  ]
 }
