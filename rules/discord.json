@@ -11,6 +11,7 @@
     ],
     "except": [
       "match domain \"discord.com\"",
+      "match domain \"www.discord.com\"",
       "match domain \"discordapp.com\""
     ]
   },

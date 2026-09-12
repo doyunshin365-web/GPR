@@ -11,7 +11,10 @@
     ],
     "except": [
       "match domain \"apple.com\"",
-      "match domain \"icloud.com\""
+      "match domain \"www.apple.com\"",
+      "match domain \"appleid.apple.com\"",
+      "match domain \"icloud.com\"",
+      "match domain \"www.icloud.com\""
     ]
   },
   "detect": 1

@@ -11,6 +11,7 @@
     ],
     "except": [
       "match domain \"google.com\"",
+      "match domain \"www.google.com\"",
       "match domain \"accounts.google.com\"",
       "match domain \"googleusercontent.com\""
     ]

@@ -10,7 +10,8 @@
       "match text \"instagram\" AND match text \"account verification\" AND match text \"security\""
     ],
     "except": [
-      "match domain \"instagram.com\""
+      "match domain \"instagram.com\"",
+      "match domain \"www.instagram.com\""
     ]
   },
   "detect": 1

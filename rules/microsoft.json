@@ -11,9 +11,15 @@
     ],
     "except": [
       "match domain \"microsoft.com\"",
+      "match domain \"www.microsoft.com\"",
       "match domain \"microsoftonline.com\"",
+      "match domain \"login.microsoftonline.com\"",
       "match domain \"live.com\"",
-      "match domain \"office.com\""
+      "match domain \"login.live.com\"",
+      "match domain \"office.com\"",
+      "match domain \"www.office.com\"",
+      "match domain \"outlook.com\"",
+      "match domain \"www.outlook.com\""
     ]
   },
   "detect": 1

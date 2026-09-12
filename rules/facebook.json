@@ -11,7 +11,9 @@
     ],
     "except": [
       "match domain \"facebook.com\"",
-      "match domain \"fb.com\""
+      "match domain \"www.facebook.com\"",
+      "match domain \"fb.com\"",
+      "match domain \"www.fb.com\""
     ]
   },
   "detect": 1

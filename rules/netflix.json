@@ -10,7 +10,8 @@
       "match text \"netflix\" AND match text \"update payment information\" AND match text \"account\""
     ],
     "except": [
-      "match domain \"netflix.com\""
+      "match domain \"netflix.com\"",
+      "match domain \"www.netflix.com\""
     ]
   },
   "detect": 1

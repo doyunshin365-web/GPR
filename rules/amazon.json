@@ -11,9 +11,13 @@
     ],
     "except": [
       "match domain \"amazon.com\"",
+      "match domain \"www.amazon.com\"",
       "match domain \"amazon.co.uk\"",
+      "match domain \"www.amazon.co.uk\"",
       "match domain \"amazon.de\"",
-      "match domain \"amazon.co.jp\""
+      "match domain \"www.amazon.de\"",
+      "match domain \"amazon.co.jp\"",
+      "match domain \"www.amazon.co.jp\""
     ]
   },
   "detect": 1

@@ -10,7 +10,11 @@
       "match text \"coinbase\" AND match text \"identity verification\" AND match text \"account\""
     ],
     "except": [
-      "match domain \"coinbase.com\""
+      "match domain \"coinbase.com\"",
+      "match domain \"www.coinbase.com\"",
+      "match domain \"login.coinbase.com\"",
+      "match domain \"pro.coinbase.com\"",
+      "match domain \"help.coinbase.com\""
     ]
   },
   "detect": 1

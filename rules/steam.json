@@ -11,7 +11,12 @@
     ],
     "except": [
       "match domain \"steampowered.com\"",
-      "match domain \"steamcommunity.com\""
+      "match domain \"www.steampowered.com\"",
+      "match domain \"store.steampowered.com\"",
+      "match domain \"help.steampowered.com\"",
+      "match domain \"login.steampowered.com\"",
+      "match domain \"steamcommunity.com\"",
+      "match domain \"www.steamcommunity.com\""
     ]
   },
   "detect": 1
