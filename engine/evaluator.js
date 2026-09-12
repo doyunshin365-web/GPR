@@ -80,3 +80,7 @@
   global.PhishRule.evaluateRule = evaluateRule;
   global.PhishRule.getCurrentPageContext = getCurrentPageContext;
 })(typeof window !== "undefined" ? window : globalThis);
+// Node.js 지원
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = global.PhishRule;
+}

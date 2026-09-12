@@ -1,32 +1,29 @@
 /**
  * 사용법:
- *   node run_test.js <rule.json 경로> <test.html 경로> <domain>
+ *   node run_test.js <rule.json 경로> <text> <domain>
  * 예:
- *   node run_test.js rules/test_paypal.json tests/test_paypal.html paypal-secure-login.net
- *   node run_test.js rules/test_paypal.json tests/test_paypal.html paypal.com
+ *   node run_test.js rules/test_paypal.json "paypal payment authentication your account has been limited verify your identity" paypal-secure-login.net
+ *   node run_test.js rules/test_paypal.json "paypal" paypal.com
  */
 
 const fs = require("fs");
 const path = require("path");
-const { JSDOM } = require("jsdom");
-const { evaluateRule } = require("./engine/evaluator.js");
+// 엔진 로드 (parser -> evaluator -> ruleLoader 순서)
+require("./engine/parser.js");
+require("./engine/evaluator.js");
+const PhishRule = require("./engine/ruleLoader.js");
 
-const [, , rulePath, htmlPath, domain] = process.argv;
+const [, , rulePath, text, domain] = process.argv;
 
-if (!rulePath || !htmlPath || !domain) {
-  console.error("사용법: node run_test.js <rule.json> <test.html> <domain>");
+if (!rulePath || !text || !domain) {
+  console.error("사용법: node run_test.js <rule.json> <text> <domain>");
   process.exit(1);
 }
 
 const rule = JSON.parse(fs.readFileSync(path.resolve(rulePath), "utf-8"));
-const html = fs.readFileSync(path.resolve(htmlPath), "utf-8");
+const context = { text, domain };
 
-const dom = new JSDOM(html);
-const renderedText = dom.window.document.body.textContent || "";
-
-const context = { text: renderedText, domain };
-
-const result = evaluateRule(rule, context);
+const result = PhishRule.evaluateRule(rule, context);
 
 console.log(`룰: ${rule.name}`);
 console.log(`도메인: ${domain}`);

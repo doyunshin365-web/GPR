@@ -28,3 +28,7 @@
   global.PhishRule = global.PhishRule || {};
   global.PhishRule.evaluateAllRules = evaluateAllRules;
 })(typeof window !== "undefined" ? window : globalThis);
+// Node.js 지원
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = global.PhishRule;
+}

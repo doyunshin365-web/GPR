@@ -13,7 +13,7 @@
   "host_permissions": ["<all_urls>"],
   "web_accessible_resources": [
     {
-      "resources": ["rules/*.json"],
+      "resources": ["rules/*.json", "asset/gpr-icons/png/*.png"],
       "matches": ["<all_urls>"]
     }
   ],

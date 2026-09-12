@@ -26,7 +26,7 @@ const STATE_CONFIG = {
     className: "idle",
   },
   safe: {
-    icon: "light.png",
+    icon: "safe.png",
     title: "Site is Safe",
     subtitle: "No security threats were detected on this site.",
     className: "safe",
@@ -112,7 +112,10 @@ function updateOverview(ruleCount) {
 /**
  * 현재 활성 탭의 content script에 스캔 상태를 요청
  */
-function requestScanStatus() {
+const POLL_INTERVAL_MS = 150;
+const POLL_MAX_TRIES = 40; // 최대 ~6초까지 스캔 완료를 기다림
+
+function requestScanStatus(triesLeft = POLL_MAX_TRIES) {
   chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
     const tab = tabs[0];
     if (!tab || !tab.id) return;
@@ -128,6 +131,11 @@ function requestScanStatus() {
       if (!response) {
         applyState("idle");
         updateOverview(0);
+        return;
+      }
+      // 아직 스캔 중이면 idle을 확정짓지 말고 잠깐 뒤에 다시 물어본다
+      if (response.scanning && triesLeft > 0) {
+        window.setTimeout(() => requestScanStatus(triesLeft - 1), POLL_INTERVAL_MS);
         return;
       }
       applyState(response.state || "idle");
